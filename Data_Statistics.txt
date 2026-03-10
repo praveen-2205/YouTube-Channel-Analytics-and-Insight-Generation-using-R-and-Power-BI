@@ -1,0 +1,189 @@
+Here's a comprehensive breakdown of the Global YouTube Statistics dataset with all 29 columns explained for preprocessing:
+📊 Dataset Overview
+Table
+
+Metric		Value
+Total Rows	1,006
+Total Columns	29
+Encoding	latin-1 (had UTF-8 issues)
+
+📋 Column-by-Column Breakdown
+1. rank
+Table
+
+Attribute	    Value
+Type		    Integer
+Range		    1 – 995
+Missing		    0%
+Preprocessing	Ready to use as identifier
+
+2. Youtuber (Channel Name)
+Table
+
+Attribute	    Value
+Type		    String (Categorical)
+Unique Values	995
+Missing		    0%
+Issues		    99 rows have encoding corruption (ý, ï, ¿ characters)
+Preprocessing	Fix encoding; handle 11 duplicate names
+
+3. subscribers
+Table
+
+Attribute	    Value
+Type		    Float (Numeric)
+Range		    12.3M – 245M
+Missing		    0.3% (3 rows)
+Preprocessing	Impute missing; consider log transformation; 81 outliers detected
+
+4. video views
+Table
+
+Attribute	    Value
+Type            Float (Numeric)
+Range		    0 – 228 billion
+Missing		    0%
+Preprocessing	9 rows (0.9%) have zero values – investigate or impute
+
+5. category
+Table
+
+Attribute	    Value
+Type		    String (Categorical)
+Unique Values	18 categories
+Top Values	    Entertainment (238), Music (203), People & Blogs (131)
+Missing		    5.47% (55 rows)
+Preprocessing	Use mode imputation or "Unknown" category
+
+6. Title
+Table
+
+Attribute	    Value
+Type		    String
+Unique Values	992
+Missing		    0%
+Preprocessing	106 rows have encoding issues; consider dropping (redundant with Youtuber)
+
+7. uploads
+Table
+
+Attribute	    Value
+Type		    Integer
+Range		    0 – 301,308
+Missing		    0%
+Preprocessing	44 rows (4.4%) have zero uploads; log transform recommended
+
+8. Country of origin
+Table
+
+Attribute	    Value
+Type		    String (Categorical)
+Unique Values	49 countries
+Top Country	    United States (315 channels)
+Missing		    12.43% (125 rows)
+
+9. Country
+Table
+
+Attribute	    Value
+Type		    String (Categorical)
+Issues		    Inconsistent case with "Country of origin"; 125 mismatches
+Preprocessing	Consider dropping – redundant and inconsistent
+
+10. Abbreviation
+Table
+
+Attribute	    Value
+Type		    String (2-letter ISO codes)
+Unique Values	49 codes
+Missing		    12.43% (125 rows)
+
+11. channel_type
+Table
+
+Attribute	    Value
+Type		    String (Categorical)
+Unique Values	14 types
+Top Types	Entertainment (304), Music (217), People (102)
+Missing		3.18% (32 rows)
+
+12-14. Ranking Columns (video_views_rank, country_rank, channel_type_rank)
+Table
+
+Attribute	    Value
+Type		    Float (Numeric)
+Missing		    0.1%, 11.8%, 3.5% respectively
+Preprocessing	country_rank missing aligns with missing country data
+
+15. video_views_for_the_last_30_days
+Table
+
+Attribute	Value
+Type		Float (Numeric)
+Range		1 – 6.59 billion
+Missing		5.67% (57 rows)
+
+16-19. Earnings Columns (monthly/yearly, low/high)
+Table
+
+Attribute	    Value
+Type		    Float (USD)
+Monthly Range	$0 – $13.6M
+Yearly Range	$0 – $163.4M
+Missing		    0%
+Issues		    90-119 rows have zero earnings
+Preprocessing	Verify yearly ≈ monthly × 12; log transform recommended
+
+20. subscribers_for_last_30_days
+Table
+
+Attribute	    Value
+Type		    Float (Numeric)
+Range		    1 – 8M
+Missing		    33.80% (340 rows) ⚠️
+Preprocessing	Consider dropping – too many missing values
+
+21-23. Date Columns (created_year, created_month, created_date)
+Table
+
+Attribute	    Value
+Year Range	    1970 – 2022 (1970 is likely an error)
+Month		    3-letter abbrev (Jan-Dec)
+Date		    1 – 31
+Missing		    0.5%, 1.2%, 0.5%
+Preprocessing	Combine into datetime; convert types to integer
+
+24-29. Country Demographics
+Table
+
+Column					                Type	Range		    Missing
+Gross tertiary education enrollment (%)	Float	7.6% – 113.1%	12.52%
+Population				                Float	202K – 1.4B	    12.52%
+Unemployment rate			            Float	0.075% – 14.72%	12.52%
+Urban_population			            Float	35K – 842M	    12.52%
+Latitude				                Float	-38.4 – 61.9	12.52%
+Longitude				                Float	-172.1 – 138.3	12.52%
+
+⚠️ Critical Preprocessing Issues
+Table
+
+Issue			    Count			    Recommendation
+Encoding corruption	99-106 rows		    Fix character encoding in text columns
+High missing rate	340 rows (33.8%)	Consider dropping subscribers_for_last_30_days
+Zero earnings		90-119 rows		    Decide: impute, remove, or flag as inactive
+Zero uploads		44 rows			    Investigate inactive channels
+Duplicate channels	11 names		    Merge or remove duplicates
+Year outlier		1970			    Verify or correct to valid year
+
+📁 Column Groups for ML Preprocessing
+Table
+
+Group			Columns								                            Action
+Identifiers		rank, Youtuber							                        Keep (fix encoding)
+Channel Metrics	subscribers, video views, uploads, video_views_for_last_30_days	Log transform
+Earnings		lowest/highest monthly/yearly					                Verify consistency
+Categorical		category, channel_type, Country of origin, Abbreviation		    One-hot encode
+Rankings		video_views_rank, country_rank, channel_type_rank		        Scale/normalize
+Date		    created_year, created_month, created_date			            Combine to datetime
+Demographics	Population, Unemployment rate, etc.				                Optional features
+Drop		    Country, Title	Redundant

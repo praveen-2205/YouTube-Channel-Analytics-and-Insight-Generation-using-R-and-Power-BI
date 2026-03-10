@@ -1,0 +1,45 @@
+Title
+YouTube Channel Analytics and Insight Generation using R and Power BI
+
+
+Objective
+The primary objective of this project is to analyze a large dataset of global YouTube channels using R programming for data preprocessing, statistical analysis, and visualization, and then present meaningful insights through an interactive Power BI dashboard. The project aims to uncover patterns related to subscribers, video views, earnings, categories, countries, and socio-economic indicators.
+Problem Definition
+With the exponential growth of digital content platforms like YouTube, vast amounts of channel data are generated daily. However, raw datasets are often unstructured and difficult to interpret without proper preprocessing and visualization tools. The problem addressed in this project is cleaning and preprocessing large YouTube channel data, extracting meaningful statistical insights, identifying trends, correlations, and patterns, and presenting the results in a user‑friendly dashboard for decision‑making and analysis.
+Motivation
+YouTube has become one of the most influential digital platforms for entertainment, education, and business. Understanding factors such as subscriber growth, video uploads, earnings, and geographic distribution can help content creators strategize growth, assist marketers in targeting audiences, provide insights into global digital media trends, and demonstrate practical use of Data Warehousing & Mining concepts using real‑world data. This project bridges theoretical learning with real‑world application using R and Power BI, which are industry‑relevant tools.
+Description About Dataset
+The dataset contains statistics of top YouTube channels worldwide, including subscriber counts, video views, upload frequency, country details, earnings, and socio‑economic indicators. It enables multi‑dimensional analysis of content creation trends and platform success factors. Key attributes include channel information, performance metrics, financial metrics, growth metrics, geographical data, socio‑economic indicators, and temporal data.
+
+
+Methodology
+1. Data Collection – Dataset imported into R Studio from CSV format.
+2. Data Preprocessing in R – Handling missing values, removing duplicates, converting data types, normalizing column names, and feature engineering.
+3. Exploratory Data Analysis – Summary statistics, aggregations, correlation matrices, and trend analysis.
+4. Visualization in R – Bar charts, box plots, histograms, scatter plots, and line charts.
+5. Data Export – Cleaned dataset exported to Power BI.
+6. Dashboard Creation in Power BI – Interactive visuals, KPI cards, geo‑maps, trend charts, and filters for dynamic analysis.
+
+
+Use Case Questions
+• Preprocessing dataset for accurate insights
+• Top 10 YouTube channels by subscribers
+• Category with highest average subscribers
+• Average uploads per category
+• Top 5 countries with highest channels
+• Distribution of channel types
+• Correlation between subscribers and video views
+• Monthly earnings variation across categories
+• Subscriber growth trends in last 30 days
+• Outliers in yearly earnings
+• Distribution of channel creation dates
+• Relationship between education enrollment and channels
+• Unemployment rate comparison among top countries
+• Urban population percentage averages
+• Geographic distribution patterns
+• Correlation between subscribers and population
+• Population comparison of top countries
+• Subscribers gained vs unemployment correlation
+• Video views distribution in last 30 days
+• Seasonal upload trends
+• Average monthly subscriber gain since creation
